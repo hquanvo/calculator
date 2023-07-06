@@ -9,8 +9,9 @@ body {
 button {
     height: 80px;
     width: 80px;
-    font-size: large;
+    font-size: 40px;
     font-weight: bolder;
+    text-align: center;
 }
 
 .container {
