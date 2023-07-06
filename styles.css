@@ -6,6 +6,13 @@ body {
     font-family: roboto, Arial, Helvetica, sans-serif;
 }
 
+button {
+    height: 80px;
+    width: 80px;
+    font-size: large;
+    font-weight: bolder;
+}
+
 .container {
     display: flex;
     width: 600px;
@@ -47,6 +54,10 @@ body {
 }
 
 .button-container {
-    display: flex;
-    flex: 3 1 80%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto auto auto auto;
+    width: 85%;
+    height: 85%;
 }
