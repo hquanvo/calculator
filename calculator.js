@@ -28,7 +28,11 @@ specials[3].addEventListener('click', () => {
         displayBottom.innerHTML = "-" + displayBottom.innerHTML;
     }
 })
-
+specials[4].addEventListener('click', () => {
+    if (!displayBottom.innerHTML.includes(".") && displayBottom.innerHTML != '0') {
+        displayBottom.innerHTML += ".";
+    }
+})
 
 let first = 0;
 let operation = '';
