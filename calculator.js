@@ -20,6 +20,15 @@ nums.forEach((num) => {
 specials[0].addEventListener('click', clearAll);
 specials[1].addEventListener('click', clearOne);
 specials[2].addEventListener('click', percentage);
+specials[3].addEventListener('click', () => {
+    if (displayBottom.innerHTML === "0") return;
+    if (displayBottom.innerHTML.startsWith("-")) {
+        displayBottom.innerHTML = displayBottom.innerHTML.slice(1);
+    } else {
+        displayBottom.innerHTML = "-" + displayBottom.innerHTML;
+    }
+})
+
 
 let first = 0;
 let operation = '';
@@ -69,8 +78,18 @@ function clearAll() {
 }
 
 function clearOne() {
-    displayBottom.innerHTML = 
-    displayBottom.innerHTML.slice(0, displayBottom.innerHTML.length - 1);
+    let numsRemain;
+    if (displayBottom.innerHTML.startsWith('-')) {
+        numsRemain = displayBottom.innerHTML.length - 1;
+    } else {
+        numsRemain = displayBottom.innerHTML.length;
+    }
+    if (numsRemain > 1) {
+        displayBottom.innerHTML = 
+        displayBottom.innerHTML.slice(0, displayBottom.innerHTML.length - 1);
+    } else {
+        clearAll();
+    }
 }
 
 function percentage() {
