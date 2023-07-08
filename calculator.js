@@ -1,3 +1,11 @@
+let firstOperand = 0;
+let operation = '';
+let secondOperand = 0;
+let isOperationPreviousInput = false;
+
+// handling keyboard inputs
+document.addEventListener('keydown', (event) => handleKeyboardInput(event))
+
 // declare variables
 // contains AC, C, %, +/-, .
 const specials = document.querySelectorAll(".special");
@@ -8,43 +16,19 @@ const operators = document.querySelectorAll(".operator");
 const displayTop = document.querySelector(".display > .top");
 const displayBottom = document.querySelector(".display > .bottom");
 
-let firstOperand = 0;
-let operation = '';
-let secondOperand = 0;
-let isOperationPreviousInput = false;
-
 nums.forEach((num) => {
-    num.addEventListener('click', () => {
-        if (displayBottom.innerHTML === '0' || isOperationPreviousInput) {
-            displayBottom.innerHTML = '';
-        }
-        if (isOperationPreviousInput) isOperationPreviousInput = false;
-        displayBottom.innerHTML += num.innerHTML;
-    })
+    num.addEventListener('click', () => {handleNumberInput(num.innerHTML)})
 })
 
 specials[0].addEventListener('click', clearAll);
 specials[1].addEventListener('click', clearOne);
 specials[2].addEventListener('click', percentage);
-specials[3].addEventListener('click', () => {
-    if (isOperationPreviousInput) isOperationPreviousInput = false;
-    if (displayBottom.innerHTML === "0") return;
-    if (displayBottom.innerHTML.startsWith("-")) {
-        displayBottom.innerHTML = displayBottom.innerHTML.slice(1);
-    } else {
-        displayBottom.innerHTML = "-" + displayBottom.innerHTML;
-    }
-})
-specials[4].addEventListener('click', () => {
-    if (isOperationPreviousInput) isOperationPreviousInput = false;
-    if (!displayBottom.innerHTML.includes(".") && displayBottom.innerHTML != '0') {
-        displayBottom.innerHTML += ".";
-    }
-})
+specials[3].addEventListener('click', handleSignFlip);
+specials[4].addEventListener('click', handleDecimal);
 
 operators.forEach((operator) => {
     operator.addEventListener('click', () => {
-        handleOperatorClick(operator);
+        handleOperatorInput(operator.innerHTML);
     })
 })
 
@@ -119,8 +103,8 @@ function percentage() {
     parseFloat(displayBottom.innerHTML)/100;
 }
 
-function handleOperatorClick(operator) {
-    if (operator.innerHTML === "=") {
+function handleOperatorInput(operator) {
+    if (operator === "=") {
         if (operation != '' && !isOperationPreviousInput) {
             secondOperand = parseFloat(displayBottom.innerHTML);
             if (secondOperand === 0) {
@@ -138,12 +122,83 @@ function handleOperatorClick(operator) {
         if (operation === '') {
             firstOperand = parseFloat(displayBottom.innerHTML);
             isOperationPreviousInput = true;
-            operation = operator.innerHTML;
+            operation = operator;
             displayTop.innerHTML = "" + firstOperand + " " + operation;
         }
     }
 }
 
-function enterFirstValue() {
-    
+function handleNumberInput(num) {
+    if (displayBottom.innerHTML === '0' || isOperationPreviousInput) {
+        displayBottom.innerHTML = '';
+    }
+    if (isOperationPreviousInput) isOperationPreviousInput = false;
+    displayBottom.innerHTML += num;
+}
+
+function handleDecimal() {
+    if (isOperationPreviousInput) isOperationPreviousInput = false;
+    if (!displayBottom.innerHTML.includes(".") && displayBottom.innerHTML != '0') {
+        displayBottom.innerHTML += ".";
+    }
+}
+
+function handleSignFlip() {
+    if (isOperationPreviousInput) isOperationPreviousInput = false;
+    if (displayBottom.innerHTML === "0") return;
+    if (displayBottom.innerHTML.startsWith("-")) {
+        displayBottom.innerHTML = displayBottom.innerHTML.slice(1);
+    } else {
+        displayBottom.innerHTML = "-" + displayBottom.innerHTML;
+    }
+}
+
+function handleKeyboardInput(event) {
+    let key = event.key;
+    console.log(key);
+    if (!isNaN(key)) {
+        handleNumberInput(+key);
+    } else {
+        switch (key) {
+            case "Backspace": {
+                clearOne();
+                break;
+            }
+            case "c": {
+                clearAll();
+                break;
+            }
+            case "f": {
+                handleSignFlip();
+                break;
+            }
+            case "%": {
+                percentage();
+                break;
+            }
+            case ".": {
+                handleDecimal();
+                break;
+            }
+            case "+": {
+                handleOperatorInput("+");
+                break;
+            }
+            case "-": {
+                handleOperatorInput("-");
+                break;
+            }
+            case "(": {
+                handleOperatorInput("×");
+                break;
+            }
+            case "/": {
+                handleOperatorInput("÷");
+                break;
+            }
+            case "=": {
+                handleOperatorInput("=");
+            }
+        }
+    }
 }
