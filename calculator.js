@@ -85,6 +85,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (b === 0) return "Syntax error";
     return a / b;
 }
 
@@ -121,13 +122,13 @@ function percentage() {
 
 function handleOperatorClick(operator) {
     if (operator.innerHTML === "=") {
-        // TODO: handle the equal case
         if (operation != '' && !isOperationPreviousInput) {
             secondOperand = parseFloat(displayBottom.innerHTML);
         }
         operate();
-        displayTop.innerHTML = '';
+        displayTop.innerHTML = displayTop.innerHTML + " " + secondOperand;
         displayBottom.innerHTML = firstOperand;
+        operation === '';
     } else {
         if (operation === '') {
             firstOperand = parseFloat(displayBottom.innerHTML);
