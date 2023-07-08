@@ -107,13 +107,13 @@ function handleOperatorInput(operator) {
                 alert("The second operand cannot be 0.");
                 return;
             }
+            firstOperand = Math.round(operate() * 1000) / 1000;
+            if (operation != '') {
+                displayTop.innerHTML = displayTop.innerHTML + " " + secondOperand;
+            }
+            displayBottom.innerHTML = firstOperand;
+            operation = '';
         }
-        firstOperand = Math.round(operate() * 1000) / 1000;
-        if (operation != '') {
-            displayTop.innerHTML = displayTop.innerHTML + " " + secondOperand;
-        }
-        displayBottom.innerHTML = firstOperand;
-        operation = '';
     } else {
         if (operation === '') {
             firstOperand = parseFloat(displayBottom.innerHTML);
