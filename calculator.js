@@ -155,7 +155,6 @@ function handleSignFlip() {
 
 function handleKeyboardInput(event) {
     let key = event.key;
-    console.log(key);
     if (!isNaN(key)) {
         handleNumberInput(+key);
     } else {
@@ -188,7 +187,7 @@ function handleKeyboardInput(event) {
                 handleOperatorInput("-");
                 break;
             }
-            case "(": {
+            case "x": {
                 handleOperatorInput("×");
                 break;
             }
