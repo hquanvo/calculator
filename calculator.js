@@ -85,7 +85,6 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0) return "Syntax error";
     return a / b;
 }
 
@@ -124,17 +123,23 @@ function handleOperatorClick(operator) {
     if (operator.innerHTML === "=") {
         if (operation != '' && !isOperationPreviousInput) {
             secondOperand = parseFloat(displayBottom.innerHTML);
+            if (secondOperand === 0) {
+                alert("The second operand cannot be 0.");
+                return;
+            }
         }
         operate();
-        displayTop.innerHTML = displayTop.innerHTML + " " + secondOperand;
+        if (operation != '') {
+            displayTop.innerHTML = displayTop.innerHTML + " " + secondOperand;
+        }
         displayBottom.innerHTML = firstOperand;
-        operation === '';
+        operation = '';
     } else {
         if (operation === '') {
             firstOperand = parseFloat(displayBottom.innerHTML);
             isOperationPreviousInput = true;
             operation = operator.innerHTML;
-            displayTop.innerHTML = displayTop.innerHTML + firstOperand + " " + operation;
+            displayTop.innerHTML = "" + firstOperand + " " + operation;
         }
     }
 }
