@@ -37,20 +37,16 @@ operators.forEach((operator) => {
 function operate() {
     switch (operation) {
         case "+": {
-            firstOperand = add(firstOperand, secondOperand);
-            break;
+            return add(firstOperand, secondOperand);
         }
         case "-": {
-            firstOperand = subtract(firstOperand, secondOperand);
-            break;
+            return subtract(firstOperand, secondOperand);
         }
         case '×': {
-            firstOperand = multiply(firstOperand, secondOperand);
-            break;
+            return multiply(firstOperand, secondOperand);
         }
         case '÷': {
-            firstOperand = divide(firstOperand, secondOperand)
-            break;
+            return divide(firstOperand, secondOperand);
         }
     }
 }
@@ -112,7 +108,7 @@ function handleOperatorInput(operator) {
                 return;
             }
         }
-        operate();
+        firstOperand = Math.round(operate() * 1000) / 1000;
         if (operation != '') {
             displayTop.innerHTML = displayTop.innerHTML + " " + secondOperand;
         }
@@ -138,7 +134,7 @@ function handleNumberInput(num) {
 
 function handleDecimal() {
     if (isOperationPreviousInput) isOperationPreviousInput = false;
-    if (!displayBottom.innerHTML.includes(".") && displayBottom.innerHTML != '0') {
+    if (!displayBottom.innerHTML.includes(".")) {
         displayBottom.innerHTML += ".";
     }
 }
