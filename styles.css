@@ -1,9 +1,17 @@
+a {
+    color: #03001C;
+}
+a:hover {
+    color: #a23a00;
+}
+
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column; 
     font-family: roboto, Arial, Helvetica, sans-serif;
+    background-color: #ffb6c1;
 }
 
 button {
@@ -12,6 +20,16 @@ button {
     font-size: 40px;
     font-weight: bolder;
     text-align: center;
+    border: solid 4px #5B8FB9;
+    background-color: #ffd0b6;
+}
+
+button:hover {
+    background-color: #ffaf83;
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 .container {
@@ -20,8 +38,10 @@ button {
     height: 750px;
     align-items: center;
     justify-content: center;
-    background-color: #757575;
+    background-color: #b6e5ff;
     flex-direction: column;
+    border: solid 4px #03001C;
+
 }
 
 .display {
@@ -31,10 +51,11 @@ button {
     width: 85%;
     align-items: center;
     justify-content: center;
-    background-color: #BDBDBD;
+    background-color: #fff1e9;
     padding: 8px;
     margin: 20px 10px;
     font-size: 40px;
+    border: solid 4px #03001C;
 }
 
 .display .top {
