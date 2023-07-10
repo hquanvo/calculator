@@ -32,6 +32,19 @@ button:active {
     transform: scale(0.98);
 }
 
+h1 {
+    text-shadow: 3px 3px 5px #fff1e9;
+}
+
+#AC, #C {
+    background-color: #a23a00;
+    color: #fff1e9;
+}
+
+#AC:hover, #C:hover {
+    background-color: #D54C00;
+}
+
 .container {
     display: flex;
     width: 600px;
